@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public Customer Customer { get; set; }
-        public int ServiceId { get; set; }
+        public IEnumerable<Service> Services { get; set; }
         public double Account { get; set; }
     }
 }
