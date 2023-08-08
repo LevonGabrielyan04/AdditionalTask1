@@ -21,11 +21,24 @@ namespace LracucichTask1.Data
                 .HasMany(o => o.Subsribers)
                 .WithOne(c => c.Customer)
                 .IsRequired();
+            modelBuilder.Entity<Customer>()
+                .Property(p => p.FirstName)
+                .HasMaxLength(20);
+            modelBuilder.Entity<Customer>()
+                .Property(p => p.SecondName)
+                .HasMaxLength(20);
+                
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => new {c.FirstName,c.SecondName});
 
             modelBuilder.Entity<Service>()
                 .HasMany(o => o.Subscribers)
                 .WithMany(c => c.Services)
                 .UsingEntity(join => join.ToTable("SubscriberService"));
+
+            modelBuilder.Entity<Subsriber>()
+                .HasCheckConstraint("Account","Account>=0");
+
         }
     }
 }

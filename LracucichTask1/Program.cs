@@ -30,3 +30,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionString"));
+AppDbContext dbContext = new AppDbContext(optionsBuilder.Options);
+
